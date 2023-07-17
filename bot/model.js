@@ -1,11 +1,18 @@
 const { NlpManager } = require('node-nlp')
 
-module.exports = ((req,res) => {
+module.exports = (async(req,res) => {
   
   const manager = new NlpManager({languages: ['en']});
 
-  //intents
-  const questions = ['hey','hello','how are you'];
-  const answers = ['hey you','hey today i am feeling good how are you','hello'];
+  //intents and utterances 
+  manager.addDocument('en','Hello','greetings')
+
+  //train 
+  manager.addAnswer('en','greetings','How are you');
+
+  await manager.train();
+
+  const response = await manager.process('en','Hello')
+  res.send(response)
 
 })
