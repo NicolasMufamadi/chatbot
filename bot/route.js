@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const model = require('./model');
+const model = require('./GreetingModel');
 
-router.get('/',model);
+router.post('/',model);
 
 module.exports = router;
